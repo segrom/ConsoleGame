@@ -18,7 +18,11 @@ public abstract class BaseView
     protected BaseView(Router router)
     {
         Router = router;
-        if (router.ViewStack.Count > 1)
+    }
+
+    public void AddBackButton()
+    {
+        if (Router.ViewStack.Count > 1)
         {
             AddButton(BackButtonKey, new ReactString("Back"), Router.Back);
             _withBackButton = true;

@@ -11,7 +11,7 @@ namespace ClientServerDb.Views;
 public class GameView: BaseView
 {
 
-    private readonly ReactString _help = new($" \'{Configuration.PlayerChar}\'- player, \'{Configuration.EnemyChar}\'- other player");
+    private readonly ReactString _help = new($" \'{Configuration.PlayerChar}\'- player, \'{Configuration.EnemyChar}\'- other player, \'{Configuration.WallChar}\'- wall");
     private readonly ReactBoolean _isLoading = new(false);
     private readonly ReactValue<IGameConnectionClient?> _connection = new(null);
     private readonly ReactValue<GameStateModel?> _gameState = new(null);
