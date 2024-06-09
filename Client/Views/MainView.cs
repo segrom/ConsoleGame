@@ -31,7 +31,7 @@ public class MainView: BaseView
             throw new Exception(string.Join(", ", errors));
         }
 
-        _userInfo.Value = $"{user.Nickname}";
+        _userInfo.Value = $"{user.Nickname} [kills: {user.Kills}]";
         StateChanged();
     }
 

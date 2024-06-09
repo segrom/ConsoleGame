@@ -1,22 +1,30 @@
 ﻿using System.Numerics;
 using Domain.Models.Game;
 using Server.Connections;
+using Server.Controllers.Users;
+using Server.Services;
+using Server.Utils;
 
 namespace Server.Common;
 
 public class GameServer
 {
     private const float MaxStepLength = 1.2f;
-    private const float MaxAttackRange = 2f;
-    private const int AttackDamage = 10;
+    private const float MaxAttackRange = 1.5f;
+    private const int AttackDamage = 2;
+
+    private IUserStatisticsService _statisticsService;
     
     private readonly Dictionary<Guid, GameConnection> _connections = new();
     private GameStateModel _state;
     
-    public GameServer(int initialPlayerCount, int mapSize)
+    private Task _gameLoop;
+    
+    public GameServer(IUserStatisticsService statisticsService, int initialPlayerCount, int mapSize)
     {
-        var map = GenerateMap(mapSize);
-        var players = GeneratePlayers(initialPlayerCount, map, mapSize);
+        _statisticsService = statisticsService;
+        var map = GameGenerator.GenerateMap(mapSize);
+        var players = GameGenerator.GeneratePlayers(initialPlayerCount, map, mapSize);
         
         _state = new GameStateModel()
         {
@@ -24,51 +32,46 @@ public class GameServer
             Map = map,
             Players = players
         };
+
+        _gameLoop = GameLoop();
     }
 
-    private Dictionary<Guid,PlayerModel> GeneratePlayers(int count, MapCell[,] map, int mapSize)
+    private async Task GameLoop()
     {
-        var players = new Dictionary<Guid, PlayerModel>();
-
-        for (int i = 0; i < count; i++)
+        while (_state.Players.Count > 0)
         {
-            var id = Guid.NewGuid();
-            Vector2 position;
-            do
+            await Task.Delay(1000);
+            bool isDirty = false;
+            foreach (var attacker in _state.Players.Where(p=>p.Value.AttackTargetId.HasValue))
             {
-                position = new Vector2(Random.Shared.Next(0, mapSize), Random.Shared.Next(0, mapSize));
-            } while (map[(int)position.X, (int)position.Y].Containment == MapCellContainment.Wall);
-            players[id] = new PlayerModel()
-            {
-                Id = id,
-                Health = 100,
-                Position = position,
-                UserId = Guid.NewGuid()
-            };
-        }
-
-        return players;
-    }
-
-    private MapCell[,] GenerateMap(int mapSize)
-    {
-        var map = new MapCell[mapSize, mapSize];
-        for (int y = 0; y < mapSize; y++)
-        {
-            for (int x = 0; x < mapSize; x++)
-            {
-                map[x, y] = new MapCell()
+                var player = attacker.Value;
+                if (player.AttackTargetId == null) continue;
+                
+                var target = _state.Players[player.AttackTargetId.Value];
+                if ((player.Position - target.Position).Length() > MaxAttackRange)
                 {
-                    Containment = Random.Shared.NextSingle() < 0.1f ? MapCellContainment.Wall : MapCellContainment.Empty,
-                };
-            }
-        }
+                    player.AttackTargetId = null;
+                    target.AttackTargetId = null;
+                    continue;
+                }
 
-        return map;
+                isDirty = true;
+                target.Health -= AttackDamage;
+
+                if (target.Health <= 0)
+                {
+                    _state.Players.Remove(target.Id);
+                    player.AttackTargetId = null;
+                    _statisticsService.UserIncrementKillScore(player.UserId);
+                }
+            }
+            if(isDirty) UpdateState();
+        }
     }
 
     public IGameConnectionClient ConnectUser(Guid userId)
     {
+        // run gameLoop if it was stopped
         if (!_connections.ContainsKey(userId))
         {
             var pos = _state.Map.GetLength(0) / 2;
@@ -120,7 +123,6 @@ public class GameServer
         if((player.Position - newPose).Length() > MaxStepLength) return;
         if(_state.Map[(int)newPose.X, (int)newPose.Y].Containment == MapCellContainment.Wall) return;
         if(_state.Players.Any(p => (p.Value.Position - newPose).Length() < 0.5f)) return;
-
         
         player.Position = newPose;
         
@@ -134,7 +136,8 @@ public class GameServer
         
         // make some action validation
         if((player.Position - target.Position).Length() > MaxAttackRange) return;
-        target.Health -= AttackDamage;
+        player.AttackTargetId = target.Id;
+        target.AttackTargetId = playerId;
         
         UpdateState();
     }

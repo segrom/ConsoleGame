@@ -2,6 +2,7 @@
 using Domain.Models;
 using Server.Common;
 using Server.Connections;
+using Server.Controllers.Users;
 
 namespace Server.Services;
 
@@ -16,13 +17,13 @@ public class GameService: IGameService
         _context = dbContext;
     }
 
-    public async Task RunServers()
+    public async Task RunServers(IUserStatisticsService statisticsService)
     {
         var list = await _context.GameServerSet.AllAsync();
 
         foreach (GameServerModel serverModel in list)
         {
-            _servers[serverModel.Address] = new GameServer(serverModel.PlayerCount, 10);
+            _servers[serverModel.Address] = new GameServer(statisticsService,  serverModel.PlayerCount, 10);
         }
     }
 
@@ -32,5 +33,4 @@ public class GameService: IGameService
 
         return server.ConnectUser(userId);
     }
-    
 }

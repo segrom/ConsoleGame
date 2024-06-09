@@ -9,4 +9,5 @@ public class PlayerModel: IModel
     public Vector2 Position { get; set; }
     public int Health { get; set; }
     public Guid UserId { get; set; }
+    public Guid? AttackTargetId { get; set; }
 }

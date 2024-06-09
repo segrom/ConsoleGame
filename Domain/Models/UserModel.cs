@@ -6,5 +6,6 @@ public class UserModel: IModel
 {
     public Guid Id { get; set; }
     public string Nickname { get; set; }
+    public int Kills { get; set; }
     public string PasswordHash { get; set; }
 }

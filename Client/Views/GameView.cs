@@ -11,7 +11,7 @@ namespace ClientServerDb.Views;
 public class GameView: BaseView
 {
 
-    private readonly ReactString _help = new(" \'@\'- player, \'$\'- other player \'.\'- empty ");
+    private readonly ReactString _help = new($" \'{Configuration.PlayerChar}\'- player, \'{Configuration.EnemyChar}\'- other player");
     private readonly ReactBoolean _isLoading = new(false);
     private readonly ReactValue<IGameConnectionClient?> _connection = new(null);
     private readonly ReactValue<GameStateModel?> _gameState = new(null);
@@ -21,6 +21,8 @@ public class GameView: BaseView
 @gameHelp
  
 @gameMap
+
+@exit
     ";
 
     private GameServerModel _serverModel;
@@ -31,9 +33,17 @@ public class GameView: BaseView
         _serverModel = server;
         
         AddText("@gameHelp", _help);
+        AddButton("@exit", new ReactString("Exit"), Exit);
         AddCustomComponent("@gameMap", new GameMapComponent(_gameState, _connection, _isLoading));
 
         ConnectToServer();
+    }
+
+    private void Exit()
+    {
+        _connection.Value?.Exit();
+        _connection.Value = null;
+        Router.GoTo(new MainView(Router));
     }
 
     private async void ConnectToServer()
@@ -55,6 +65,11 @@ public class GameView: BaseView
 
     private void SubscribeEvents(IGameConnectionClient connection)
     {
-        connection.StateChanged += state => _gameState.Value = state;
+        connection.StateChanged += state =>
+        {
+            _gameState.Value = state;
+            StateChanged();
+        };
+        
     }
 }

@@ -18,7 +18,7 @@ public abstract class BaseView
     protected BaseView(Router router)
     {
         Router = router;
-        if (router.ViewStack.Count > 0)
+        if (router.ViewStack.Count > 1)
         {
             AddButton(BackButtonKey, new ReactString("Back"), Router.Back);
             _withBackButton = true;
@@ -44,7 +44,7 @@ public abstract class BaseView
     
     private string GetHeader()
     {
-        return $"use Tab to selection\nuse Esc to exit\n\n{Title} {(_withBackButton? BackButtonKey : "")} \n________________\n";
+        return $"use Tab to selection\nuse Esc to exit\n\n{Title} {(_withBackButton? BackButtonKey : "")} \n________________________\n";
     }
 
     protected void AddCustomComponent(string key, BaseViewComponent component)

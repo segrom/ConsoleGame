@@ -10,6 +10,7 @@ namespace Server.Connections;
 public class ServerConnection: IServerConnection
 {
     private readonly IAuthService _authService;
+    private readonly IUserStatisticsService _statisticsService;
     private readonly IGameService _gameService;
     private readonly IDbContext _dbContext;
     
@@ -21,9 +22,11 @@ public class ServerConnection: IServerConnection
         _dbContext = new DbContext(new UserSet(), new GameServerSet());
         _authService = new AuthService();
         _gameService = new GameService(_dbContext);
-        _gameService.RunServers();
+        _statisticsService = new UserStatisticsService(_dbContext);
 
         UserController = new UserController(_dbContext, _authService);
         GameServersController = new GameServersController(_dbContext, _authService, _gameService);
+        
+        _gameService.RunServers(_statisticsService);
     }
 }
