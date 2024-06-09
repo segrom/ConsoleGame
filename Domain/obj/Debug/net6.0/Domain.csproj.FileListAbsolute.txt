@@ -1,0 +1,12 @@
+H:\RiderProjects\ClientServerDb\Domain\bin\Debug\net6.0\Domain.deps.json
+H:\RiderProjects\ClientServerDb\Domain\bin\Debug\net6.0\Domain.dll
+H:\RiderProjects\ClientServerDb\Domain\bin\Debug\net6.0\ref\Domain.dll
+H:\RiderProjects\ClientServerDb\Domain\bin\Debug\net6.0\Domain.pdb
+H:\RiderProjects\ClientServerDb\Domain\obj\Debug\net6.0\Domain.csproj.AssemblyReference.cache
+H:\RiderProjects\ClientServerDb\Domain\obj\Debug\net6.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+H:\RiderProjects\ClientServerDb\Domain\obj\Debug\net6.0\Domain.AssemblyInfoInputs.cache
+H:\RiderProjects\ClientServerDb\Domain\obj\Debug\net6.0\Domain.AssemblyInfo.cs
+H:\RiderProjects\ClientServerDb\Domain\obj\Debug\net6.0\Domain.csproj.CoreCompileInputs.cache
+H:\RiderProjects\ClientServerDb\Domain\obj\Debug\net6.0\Domain.dll
+H:\RiderProjects\ClientServerDb\Domain\obj\Debug\net6.0\ref\Domain.dll
+H:\RiderProjects\ClientServerDb\Domain\obj\Debug\net6.0\Domain.pdb

@@ -1,0 +1,15 @@
+H:\RiderProjects\ClientServerDb\DataBase\bin\Debug\net6.0\DataBase.deps.json
+H:\RiderProjects\ClientServerDb\DataBase\bin\Debug\net6.0\DataBase.dll
+H:\RiderProjects\ClientServerDb\DataBase\bin\Debug\net6.0\ref\DataBase.dll
+H:\RiderProjects\ClientServerDb\DataBase\bin\Debug\net6.0\DataBase.pdb
+H:\RiderProjects\ClientServerDb\DataBase\bin\Debug\net6.0\Domain.dll
+H:\RiderProjects\ClientServerDb\DataBase\bin\Debug\net6.0\Domain.pdb
+H:\RiderProjects\ClientServerDb\DataBase\obj\Debug\net6.0\DataBase.csproj.AssemblyReference.cache
+H:\RiderProjects\ClientServerDb\DataBase\obj\Debug\net6.0\DataBase.GeneratedMSBuildEditorConfig.editorconfig
+H:\RiderProjects\ClientServerDb\DataBase\obj\Debug\net6.0\DataBase.AssemblyInfoInputs.cache
+H:\RiderProjects\ClientServerDb\DataBase\obj\Debug\net6.0\DataBase.AssemblyInfo.cs
+H:\RiderProjects\ClientServerDb\DataBase\obj\Debug\net6.0\DataBase.csproj.CoreCompileInputs.cache
+H:\RiderProjects\ClientServerDb\DataBase\obj\Debug\net6.0\DataBase.csproj.CopyComplete
+H:\RiderProjects\ClientServerDb\DataBase\obj\Debug\net6.0\DataBase.dll
+H:\RiderProjects\ClientServerDb\DataBase\obj\Debug\net6.0\ref\DataBase.dll
+H:\RiderProjects\ClientServerDb\DataBase\obj\Debug\net6.0\DataBase.pdb
