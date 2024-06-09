@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "hG2Zc15k3/RTnjdenboP8h36pAo66Mifqhjg97Afqyp4M2SYd4YGG41nMU5D0AsSE3ke0QYaC+6boeiQobMP1A==",
+  "dgSpecHash": "jy+MzLBrWLiCGUwpr9WScFsERzSlz2n0wf81wVhjLsSEDco6rUwUgSI5kxQL9XIx9JfWDOCUtbGkHG/uA7xCNw==",
   "success": true,
   "projectFilePath": "H:\\RiderProjects\\ClientServerDb\\Client\\Client.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\segro_c4h97pj\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\6.0.1\\microsoft.netcore.app.runtime.win-x86.6.0.1.nupkg.sha512",
+    "C:\\Users\\segro_c4h97pj\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\6.0.1\\microsoft.windowsdesktop.app.runtime.win-x86.6.0.1.nupkg.sha512",
+    "C:\\Users\\segro_c4h97pj\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\6.0.1\\microsoft.aspnetcore.app.runtime.win-x86.6.0.1.nupkg.sha512",
+    "C:\\Users\\segro_c4h97pj\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\6.0.1\\microsoft.netcore.app.crossgen2.win-x64.6.0.1.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -50,6 +50,7 @@ public class GameServer
                 var target = _state.Players[player.AttackTargetId.Value];
                 if ((player.Position - target.Position).Length() > MaxAttackRange)
                 {
+                    isDirty = true;
                     player.AttackTargetId = null;
                     target.AttackTargetId = null;
                     continue;
