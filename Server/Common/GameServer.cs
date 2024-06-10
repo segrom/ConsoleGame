@@ -145,7 +145,9 @@ public class GameServer
 
     private void OnPlayerExit(Guid playerId)
     {
+        _connections.Remove(_state.Players[playerId].UserId);
         _state.Players.Remove(playerId);
+        
         UpdateState();
     }
     

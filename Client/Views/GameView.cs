@@ -25,7 +25,7 @@ public class GameView: BaseView
 @exit
     ";
 
-    private GameServerModel _serverModel;
+    private readonly GameServerModel _serverModel;
     
     public GameView(Router router, GameServerModel server) : base(router)
     {
